@@ -33,12 +33,6 @@ export function isNewerVersion(latest: string, current: string): boolean {
   return false;
 }
 
-function getGithubToken(): string | undefined {
-  const extra = Constants.expoConfig?.extra as Record<string, unknown> | undefined;
-  const t = extra?.githubToken;
-  return typeof t === 'string' && t.length > 0 ? t : undefined;
-}
-
 export async function checkApkVersion(): Promise<ApkStatus> {
   const currentVersion = Constants.expoConfig?.version ?? '1.0.0';
   const fallback: ApkStatus = {
@@ -52,11 +46,8 @@ export async function checkApkVersion(): Promise<ApkStatus> {
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-    const headers: Record<string, string> = { Accept: 'application/vnd.github+json' };
-    const token = getGithubToken();
-    if (token) headers.Authorization = `Bearer ${token}`;
     const response = await fetch(RELEASES_API, {
-      headers,
+      headers: { Accept: 'application/vnd.github+json' },
       signal: controller.signal,
     });
     clearTimeout(timer);
