@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "DCTires",
+    "slug": "dctires",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "package": "com.dctires.app",
+      "allowBackup": true,
+      "softwareKeyboardLayoutMode": "resize",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-sqlite",
+      "@react-native-community/datetimepicker",
+      "expo-web-browser"
+    ],
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "aa6738ed-464d-44b2-86e9-f5f1f1f7964a"
+      }
+    },
+    "owner": "tyoxic"
+  }
+}

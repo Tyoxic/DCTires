@@ -1,0 +1,24 @@
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+
+# Local env
+.env
+.env.local
+
+# Expo
+.expo-shared/
+
+# Built APKs (uploaded to GitHub Releases instead of committed)
+releases/*.apk
