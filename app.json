@@ -35,6 +35,10 @@
         "projectId": "aa6738ed-464d-44b2-86e9-f5f1f1f7964a"
       }
     },
-    "owner": "tyoxic"
+    "owner": "tyoxic",
+    "updates": {
+      "url": "https://u.expo.dev/aa6738ed-464d-44b2-86e9-f5f1f1f7964a"
+    },
+    "ios": {}
   }
 }
