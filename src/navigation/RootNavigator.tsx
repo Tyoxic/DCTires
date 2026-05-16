@@ -11,6 +11,7 @@ import ServiceDetailScreen from '../screens/ServiceDetailScreen';
 import AddEditServiceScreen from '../screens/AddEditServiceScreen';
 import CustomersListScreen from '../screens/CustomersListScreen';
 import CustomerDetailScreen from '../screens/CustomerDetailScreen';
+import StatsScreen from '../screens/StatsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -34,6 +35,7 @@ export default function RootNavigator() {
       <Stack.Screen name="AddEditService" component={AddEditServiceScreen} options={{ title: 'Log Service' }} />
       <Stack.Screen name="CustomersList" component={CustomersListScreen} options={{ title: 'Customers' }} />
       <Stack.Screen name="CustomerDetail" component={CustomerDetailScreen} options={{ title: 'Customer' }} />
+      <Stack.Screen name="Stats" component={StatsScreen} options={{ title: 'Stats' }} />
       <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
     </Stack.Navigator>
   );

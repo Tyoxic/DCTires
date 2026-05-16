@@ -230,3 +230,74 @@ export async function getAllTimeTotals(): Promise<MonthTotals> {
     count: row?.count ?? 0,
   };
 }
+
+export interface MonthlyTotals {
+  yyyyMM: string;          // e.g. '2025-08'
+  count: number;
+  revenue: number;
+  profit: number;
+  tip: number;
+}
+
+export async function getMonthlyTotals(): Promise<MonthlyTotals[]> {
+  const db = await getDatabase();
+  return db.getAllAsync<MonthlyTotals>(
+    `SELECT
+       substr(service_date, 1, 7)                              AS yyyyMM,
+       COUNT(*)                                                AS count,
+       COALESCE(SUM(price + other_fee), 0)                     AS revenue,
+       COALESCE(SUM(price + other_fee - COALESCE(cost_at_service, 0)), 0) AS profit,
+       COALESCE(SUM(tip), 0)                                   AS tip
+     FROM services
+     GROUP BY yyyyMM
+     ORDER BY yyyyMM DESC`
+  );
+}
+
+export interface TopCustomer {
+  customer_id: number;
+  name: string;
+  service_count: number;
+  revenue: number;
+  profit: number;
+  tip: number;
+}
+
+export async function getTopCustomers(limit = 10): Promise<TopCustomer[]> {
+  const db = await getDatabase();
+  return db.getAllAsync<TopCustomer>(
+    `SELECT
+       c.id   AS customer_id,
+       c.name AS name,
+       COUNT(s.id) AS service_count,
+       COALESCE(SUM(s.price + s.other_fee), 0)                                 AS revenue,
+       COALESCE(SUM(s.price + s.other_fee - COALESCE(s.cost_at_service, 0)), 0) AS profit,
+       COALESCE(SUM(s.tip), 0)                                                 AS tip
+     FROM customers c
+     INNER JOIN services s ON s.customer_id = c.id
+     GROUP BY c.id
+     HAVING service_count > 0
+     ORDER BY service_count DESC, revenue DESC, c.name COLLATE NOCASE
+     LIMIT ?`,
+    limit
+  );
+}
+
+export interface ServiceTypeStat {
+  service_type: string;
+  count: number;
+  revenue: number;
+}
+
+export async function getServiceTypeBreakdown(): Promise<ServiceTypeStat[]> {
+  const db = await getDatabase();
+  return db.getAllAsync<ServiceTypeStat>(
+    `SELECT
+       service_type,
+       COUNT(*) AS count,
+       COALESCE(SUM(price + other_fee), 0) AS revenue
+     FROM services
+     GROUP BY service_type
+     ORDER BY count DESC`
+  );
+}

@@ -121,6 +121,14 @@ export default function HomeScreen({ navigation }: Props) {
           <Text style={styles.tileTitle}>New service</Text>
           <Text style={styles.tileSub}>Log a job</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tile, styles.tileStats]}
+          onPress={() => navigation.navigate('Stats')}
+        >
+          <Text style={styles.tileIcon}>📊</Text>
+          <Text style={styles.tileTitle}>Stats</Text>
+          <Text style={styles.tileSub}>By month + top customers</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -147,6 +155,7 @@ const styles = StyleSheet.create({
   tileServices: { backgroundColor: '#E8F5E9' },
   tileCustomers: { backgroundColor: '#FFF3E0' },
   tileNew: { backgroundColor: '#F3E5F5' },
+  tileStats: { backgroundColor: '#FCE4EC' },
   tileIcon: { fontSize: 28, marginBottom: 6 },
   tileTitle: { fontSize: 16, fontWeight: '700', color: '#222' },
   tileSub: { fontSize: 12, color: '#666', marginTop: 2 },

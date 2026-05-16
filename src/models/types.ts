@@ -77,5 +77,6 @@ export type RootStackParamList = {
   AddEditService: { serviceId?: number; customerId?: number };
   CustomersList: undefined;
   CustomerDetail: { customerId: number };
+  Stats: undefined;
   Settings: undefined;
 };
